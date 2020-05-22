@@ -1,0 +1,45 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>注册</title>
+    <script>
+        /*
+        * 点击超连接或图片，换一张图片
+        * 1.给出超链接和图片绑定单击事件
+        * 2.重新设置图片的src属性值
+        * */
+        window.onload = function () {
+            //获取图片对象
+            var img = document.getElementById("checkCode");
+            //绑定单击事件
+            img.onclick = function () {
+                //加时间戳，更改连接地址，欺骗浏览器缓存
+                var time = new Date().getTime();
+                img.src = "/servlet2/checkCode?" + time;
+            }
+
+            var href = document.getElementById("fresh");
+            href.onclick = function () {
+                var time = new Date().getTime();
+                img.src = "/servlet2/checkCode?" + time;
+            }
+        }
+    </script>
+</head>
+<body>
+    <form action = "/servlet2/reqDemo03" method="post">
+        <input type="text" placeholder="请输入用户名" name="username"><br>
+        <input type="text" placeholder="请输入密码" name="password"><br>
+
+        <input type="checkbox" name="hobby" value="game">游戏
+        <input type="checkbox" name="hobby" value="ski">滑雪<br>
+
+        <img id="checkCode" src="/servlet2/checkCode" />
+
+        <a id="fresh" >看不清，换一张</a><br>
+
+        <input type="submit" value="注册">
+    </form>
+</body>
+</html>
